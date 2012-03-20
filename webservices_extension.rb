@@ -3,14 +3,10 @@ class WebservicesExtension < Radiant::Extension
   description "Adds webservices radiant tags that allows to make remote queries " +
               "to your webservices and paste results on the pages"
   
-  define_routes do |map|
-    map.namespace :admin, :member => { :remove => :get } do |admin|
-      admin.resources :webservices
-    end
-  end
-  
   def activate
-    admin.tabs.add "Webservices", "/admin/webservices", :after => "Layouts" 
+    tab "Content" do
+      add_item "Webservices", "/admin/webservices", :after => "Pages" 
+    end
     Page.send :include, WebserviceTags
   end
   
